@@ -230,7 +230,7 @@ def login_page():
             with c1:
                 new_name = st.text_input("Full Name", placeholder="John Doe")
             with c2:
-                new_dob = st.date_input("Date of Birth", value=datetime.date(2000, 1, 1))
+                new_dob = st.date_input("Date of Birth", value=datetime.date(DD, MM, YYYY))
 
             new_email = st.text_input("Email Address", placeholder="you@example.com", key="reg_email")
     
