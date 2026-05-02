@@ -535,14 +535,14 @@ def settings_page():
     # --- 4. HEALTH SECTION ---
     st.markdown("<div class='settings-header'>⚖️ Health Metrics</div>", unsafe_allow_html=True)
     with st.container(border=True):
-    try:
-        dob_str = user.get("dob", "2000-01-01")
-        if isinstance(dob_str, str):
-            dob_val = datetime.datetime.strptime(dob_str, '%Y-%m-%d')
-        else:
-            dob_val = dob_str # It's already a date object
-    except Exception:
-        dob_val = datetime.date(2000, 1, 1)  
+        try:
+                dob_str = user.get("dob", "2000-01-01")
+            if isinstance(dob_str, str):
+                dob_val = datetime.datetime.strptime(dob_str, '%Y-%m-%d')
+            else:
+                dob_val = dob_str # It's already a date object
+        except Exception:
+            dob_val = datetime.date(2000, 1, 1)  
             
         new_dob = st.date_input("Date of Birth", value=dob_val)
         
