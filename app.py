@@ -532,20 +532,23 @@ def settings_page():
         new_email = st.text_input("Email Address", value=user.get("email", st.session_state.get("current_user", "")))
         new_pass = st.text_input("Change Password", value=user.get("password", ""), type="password")
 
-    # --- 4. HEALTH SECTION ---
+# --- 4. HEALTH SECTION ---
     st.markdown("<div class='settings-header'>⚖️ Health Metrics</div>", unsafe_allow_html=True)
     with st.container(border=True):
+        # 1. Safely handle the Date of Birth logic
+        dob_str = user.get("dob", "2000-01-01")
+        
         try:
-                dob_str = user.get("dob", "2000-01-01")
-            if isinstance(dob_str, str)
-                dob_val = datetime.datetime.strptime(dob_str, '%Y-%m-%d')
+            if isinstance(dob_str, str):
+                dob_val = datetime.strptime(dob_str, '%Y-%m-%d')
             else:
-                dob_val = dob_str # It's already a date object
+                dob_val = dob_str
         except Exception:
-            dob_val = datetime.date(2000, 1, 1)  
+            dob_val = datetime.now()
             
         new_dob = st.date_input("Date of Birth", value=dob_val)
         
+        # 2. Height and Weight columns
         c1, c2 = st.columns(2)
         with c1:
             new_height = st.number_input("Height (cm)", value=float(user.get("height", 0)))
