@@ -537,7 +537,7 @@ def settings_page():
     with st.container(border=True):
         try:
                 dob_str = user.get("dob", "2000-01-01")
-            if isinstance(dob_str, str):
+            if isinstance(dob_str, str)
                 dob_val = datetime.datetime.strptime(dob_str, '%Y-%m-%d')
             else:
                 dob_val = dob_str # It's already a date object
