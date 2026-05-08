@@ -364,7 +364,7 @@ def device_connection_page():
         
         if not st.session_state.device_connected:
             if st.button("Initiate BLE Sync", type="primary", use_container_width=True):
-                with st.spinner(f"Establishing secure connection with {if connected to a smart watch}..."):
+                with st.spinner(f"Establishing secure connection with {device_choice}..."):
                     time.sleep(2) # Simulate connection delay
                 st.session_state.device_connected = True
                 st.rerun()
