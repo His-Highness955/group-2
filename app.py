@@ -7,6 +7,7 @@ import os
 import random
 import base64
 from datetime import date
+from datetime import datetime, date
 import plotly.graph_objects as go
 
 # --- DATABASE SETUP ---
