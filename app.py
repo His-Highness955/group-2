@@ -254,7 +254,7 @@ def login_page():
                     st.session_state.auth_view = 'login'
                     st.rerun()
             with b2:
-                if st.button("✔ Create Account", type="primary", use_container_width=True):
+                if st.button("Create Account ✔", type="primary", use_container_width=True):
                     if new_email and new_pw:
                         if new_pw == confirm_pw:
                             # Package the user data and save to JSON
@@ -279,16 +279,16 @@ def login_page():
 
 def sidebar_nav():
     with st.sidebar:
-        st.markdown("💙 Digital Health Twin")
+        st.markdown("Digital Health Twin")
         st.markdown("---")
-        if st.button("📊 Dashboard", use_container_width=True): st.session_state.page = "Dashboard"
+        if st.button("Dashboard", use_container_width=True): st.session_state.page = "Dashboard"
         if st.button("➕ Add Data", use_container_width=True): st.session_state.page = "Add Data"
-        if st.button("🔬 Analysis", use_container_width=True): st.session_state.page = "Analysis"
+        if st.button("Analysis", use_container_width=True): st.session_state.page = "Analysis"
         if st.button("📁 Upload", use_container_width=True): st.session_state.page = "Upload"
-        if st.button("⌚ Devices", use_container_width=True): st.session_state.page = "Devices"
+        if st.button("Devices", use_container_width=True): st.session_state.page = "Devices"
         if st.button("⚙️ Settings", use_container_width=True): st.session_state.page = "Settings"
         st.markdown("<br><br>", unsafe_allow_html=True)
-        if st.button("🚪 Logout", type="secondary", use_container_width=True):
+        if st.button("Logout", type="secondary", use_container_width=True):
             st.session_state.logged_in = False
             st.session_state.page = "Login"
             st.rerun()
@@ -331,8 +331,8 @@ def dashboard_view():
         t1, t2, t3, t4 = st.columns(4)
         if t1.button("➕\n\nAdd Vitals", use_container_width=True): st.session_state.page = "Add Data"; st.rerun()
         if t2.button("📁\n\nUpload Doc", use_container_width=True): st.session_state.page = "Upload"; st.rerun()
-        if t3.button("🔬\n\nAnalysis", use_container_width=True): st.session_state.page = "Analysis"; st.rerun()
-        if t4.button("⌚\n\nDevices", use_container_width=True): st.session_state.page = "Devices"; st.rerun()
+        if t3.button("\n\nAnalysis", use_container_width=True): st.session_state.page = "Analysis"; st.rerun()
+        if t4.button("\n\nDevices", use_container_width=True): st.session_state.page = "Devices"; st.rerun()
             
         st.markdown("📑 Key Metrics")
         m1, m2, m3, m4 = st.columns(4)
@@ -357,14 +357,14 @@ def device_connection_page():
 
     with col1:
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-        st.markdown("### 📡 Connect Wearable")
+        st.markdown("###Connect Wearable")
         st.markdown("<p class='subtext'>Initialize to sync live biological telemetry to your digital twin.</p>", unsafe_allow_html=True)
         
-        device_choice = st.selectbox("Select Device", ["if connected to a smart watch","Apple Watch Ultra", "Garmin Fenix 7", "Oura Ring Gen 3", "Samsung Galaxy Watch 6"])
+        device_choice = st.selectbox("Select Device", ["if connected to a smart watch","Apple Watch Ultra", "Oura Ring Gen 3", "Samsung Galaxy Watch 6"])
         
         if not st.session_state.device_connected:
-            if st.button("🔄 Initiate BLE Sync", type="primary", use_container_width=True):
-                with st.spinner(f"Establishing secure connection with {device_choice}..."):
+            if st.button("Initiate BLE Sync", type="primary", use_container_width=True):
+                with st.spinner(f"Establishing secure connection with {if connected to a smart watch}..."):
                     time.sleep(2) # Simulate connection delay
                 st.session_state.device_connected = True
                 st.rerun()
@@ -378,7 +378,7 @@ def device_connection_page():
 
     with col2:
         if st.session_state.device_connected:
-            st.markdown("❤️ Live Vitals")
+            st.markdown(" Live Vitals")
             v1, v2, v3 = st.columns(3)
             with v1:
                 st.markdown('<div class="glass-card" style="text-align:center; padding:15px;"><p class="subtext" style="margin:0;">Heart Rate</p><h2 style="margin:0; color:#ef4444;">74 <span style="font-size:1rem;">bpm</span></h2></div>', unsafe_allow_html=True)
@@ -390,7 +390,7 @@ def device_connection_page():
             st.markdown("<br>", unsafe_allow_html=True)
             
             # Exercise Activity Section
-            st.markdown(" 🏃‍♂️ Recent Activities")
+            st.markdown(" Recent Activities")
             
             # Tab layout for different exercises
             tab1, tab2, tab3 = st.tabs(["Jogging", "Cycling", "Swimming"])
@@ -406,7 +406,7 @@ def device_connection_page():
                     <div style="display:flex; justify-content:space-between;">
                         <span>⏱️ Duration: 28:45</span>
                         <span>🔥 Burned: 320 kcal</span>
-                        <span>👟 Pace: 5'31"/km</span>
+                        <span>👟 steps: 5'31"/km</span>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -437,8 +437,8 @@ def device_connection_page():
                     <hr style="border-color:#334155; margin:10px 0;">
                     <div style="display:flex; justify-content:space-between;">
                         <span>⏱️ Duration: 35:00</span>
-                        <span>🏊 Laps: 48</span>
-                        <span>💧 SWOLF: 34</span>
+                        <span> Laps: 48</span>
+                        <span> SWOLF: 34</span>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -461,7 +461,7 @@ def add_data_page():
         c2.number_input("Heart Rate (bpm)", value=72)
         c2.number_input("Sleep (hrs)", value=8.0)
         st.text_area("Symptoms / Notes", placeholder="How are you feeling today?")
-        if st.button("✔ Submit & Analyze", type="primary"): 
+        if st.button("Submit & Analyze", type="primary"): 
             st.success("Data Synthesized to Twin!")
             time.sleep(1)
             st.session_state.page = "Dashboard"
@@ -525,7 +525,7 @@ def settings_page():
     user = st.session_state.get("user_data", {})
 
     # 3. ACCOUNT SECTION 
-    st.markdown("<div class='settings-header'>👤 Account Information</div>", unsafe_allow_html=True)
+    st.markdown("<div class='settings-header'>Account Information</div>", unsafe_allow_html=True)
     with st.container(border=True):
         new_name = st.text_input("Full Name", value=user.get("name", ""))
         # Use .get() for email in case it's missing from the JSON
@@ -533,7 +533,7 @@ def settings_page():
         new_pass = st.text_input("Change Password", value=user.get("password", ""), type="password")
 
 # 4. HEALTH SECTION
-    st.markdown("<div class='settings-header'>⚖️ Health Metrics</div>", unsafe_allow_html=True)
+    st.markdown("<div class='settings-header'> Health Metrics</div>", unsafe_allow_html=True)
     with st.container(border=True):
         # 1. Safely handle the Date of Birth logic
         dob_str = user.get("dob", "2000-01-01")
@@ -575,7 +575,7 @@ def settings_page():
 
     # 6. ABOUT SECTION
     st.markdown("<br>", unsafe_allow_html=True)
-    with st.expander("ℹ️ About App"):
+    with st.expander("About App"):
         st.markdown(f"""
             <div class="info-box">
                 <h3 style="color:#a855f7; margin-bottom: 5px;">Group 2: Digital Health Twin</h3>
@@ -590,7 +590,7 @@ def settings_page():
         """, unsafe_allow_html=True)
 
     # 7. LOGOUT
-    if st.button("↪ Log Out", use_container_width=True):
+    if st.button("Log Out", use_container_width=True):
         st.session_state.logged_in = False
         st.session_state.page = "Login"
         st.rerun()
