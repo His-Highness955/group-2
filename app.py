@@ -6,7 +6,7 @@ import json
 import os
 import random
 import base64
-from datetime import datetime
+from datetime import date
 import plotly.graph_objects as go
 
 # --- DATABASE SETUP ---
@@ -230,7 +230,7 @@ def login_page():
             with c1:
                 new_name = st.text_input("Full Name", placeholder="John Doe")
             with c2:
-                new_dob = st.date_input("Date of Birth", value=datetime.date(2000, 1, 1))
+                new_dob = st.date_input("Date of Birth", value=date(2000, 1, 1))
 
             new_email = st.text_input("Email Address", placeholder="you@example.com", key="reg_email")
     
@@ -285,7 +285,7 @@ def sidebar_nav():
         if st.button("➕ Add Data", use_container_width=True): st.session_state.page = "Add Data"
         if st.button("🔬 Analysis", use_container_width=True): st.session_state.page = "Analysis"
         if st.button("📁 Upload", use_container_width=True): st.session_state.page = "Upload"
-        if st.button("⌚ Devices", use_container_width=True): st.session_state.page = "Devices" # NEW
+        if st.button("⌚ Devices", use_container_width=True): st.session_state.page = "Devices"
         if st.button("⚙️ Settings", use_container_width=True): st.session_state.page = "Settings"
         st.markdown("<br><br>", unsafe_allow_html=True)
         if st.button("🚪 Logout", type="secondary", use_container_width=True):
@@ -503,7 +503,7 @@ def settings_page():
 
     st.markdown("<h1 style='color: white;'>Account Settings</h1>", unsafe_allow_html=True)
 
-    # --- 2. STYLING (Internal CSS) ---
+    # 2. STYLING (Internal CSS) 
     st.markdown("""
     <style>
         .settings-header {
@@ -524,7 +524,7 @@ def settings_page():
 
     user = st.session_state.get("user_data", {})
 
-    # --- 3. ACCOUNT SECTION ---
+    # 3. ACCOUNT SECTION 
     st.markdown("<div class='settings-header'>👤 Account Information</div>", unsafe_allow_html=True)
     with st.container(border=True):
         new_name = st.text_input("Full Name", value=user.get("name", ""))
@@ -532,7 +532,7 @@ def settings_page():
         new_email = st.text_input("Email Address", value=user.get("email", st.session_state.get("current_user", "")))
         new_pass = st.text_input("Change Password", value=user.get("password", ""), type="password")
 
-# --- 4. HEALTH SECTION ---
+# 4. HEALTH SECTION
     st.markdown("<div class='settings-header'>⚖️ Health Metrics</div>", unsafe_allow_html=True)
     with st.container(border=True):
         # 1. Safely handle the Date of Birth logic
@@ -555,7 +555,7 @@ def settings_page():
         with c2:
             new_weight = st.number_input("Weight (kg)", value=float(user.get("weight", 0)))
 
-    # --- 5. SAVE CHANGES ---
+    #  5. SAVE CHANGES
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("Save All Changes", type="primary", use_container_width=True):
         # Update session state
@@ -573,7 +573,7 @@ def settings_page():
         time.sleep(1)
         st.rerun()
 
-    # --- 6. ABOUT SECTION (Expander) ---
+    # 6. ABOUT SECTION
     st.markdown("<br>", unsafe_allow_html=True)
     with st.expander("ℹ️ About App"):
         st.markdown(f"""
@@ -589,7 +589,7 @@ def settings_page():
             </div>
         """, unsafe_allow_html=True)
 
-    # --- 7. LOGOUT ---
+    # 7. LOGOUT
     if st.button("↪ Log Out", use_container_width=True):
         st.session_state.logged_in = False
         st.session_state.page = "Login"
@@ -603,7 +603,6 @@ if not st.session_state.logged_in:
 else:
     sidebar_nav()
     current_page = st.session_state.get('page', 'Dashboard')
-
     if current_page == "Dashboard":
         dashboard_view()
     elif current_page == "Add Data":
